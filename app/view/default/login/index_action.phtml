@@ -1,0 +1,24 @@
+<script>
+    $('document').ready(function(){
+       login.setEvents();  
+    });
+</script>
+<div id="usuario-cadastrar">
+    <form class="basic-form" method="post" action="<?= URL_AVALIE ?>login/autenticar">
+        <div id="modal-title">
+            Login
+        </div>
+        <div id="msg-return" class=""></div>
+        <div class="campo">
+            <label for="email">Email:</label>
+            <input id="email" type="text" name="ArUsuario[StEmail]">
+        </div>
+        <div class="campo">
+            <label for="senha">Senha:</label>
+            <input id="senha" type="password" name="ArUsuario[StSenha]">
+        </div>
+        <input type="button" value="Acessar" id="button-login" class="button link-button-verde">
+    </form>
+</div>
+</body>
+</html>

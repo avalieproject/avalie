@@ -1,0 +1,47 @@
+<?php
+$ArMessage = Message::getMessage();
+$Usuario = Session::get('Usuario');
+?>
+<div id="main-content">
+    <div id="usuario-menu-content"> 
+        <ul id="usuario-menu">
+            <li>
+                <a href="<?= URL_AVALIE ?>usuario/perfil/">Meus dados</a>
+            </li>
+            <li>
+                <a href="<?= URL_AVALIE ?>usuario/avaliacoes/">Minhas avaliações</a>
+            </li>
+            <li>
+                <a href="<?= URL_AVALIE ?>usuario/instituicoes/"><b>Instituições relacionadas</b></a>
+            </li>
+        </ul>
+    </div>
+    <div id="conteudo-perfil">
+        <h1>Instituições relacionadas</h1>
+        <?php if ($ArMessage): ?>
+            <div class="<?= !$ArMessage['StType'] ? 'erro' : 'sucesso' ?>">
+                <?= $ArMessage['StMessage'] ?>
+            </div>
+        <?php endif; ?>
+        <?php if ($_ArInstituicoes): ?>
+            <table class="table">
+                <thead>
+                <th>Instituição</th>
+                <th>Remover</th>
+                </thead>
+                <tbody>
+                    <?php foreach ($_ArInstituicoes as $Instituicao): ?>
+                        <tr>
+                            <td><a href="<?= URL_AVALIE ?>instituicao/perfil/id/<?= $Instituicao->getIDInstituicao(); ?>"><?= $Instituicao->getStNome(); ?></a></td>
+                            <td><a href="<?= URL_AVALIE ?>instituicao/desassociar/id/<?= $Instituicao->getIDInstituicao(); ?>">Remover instituição do meu perfil</a></td>
+                        </tr>  
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            Você ainda não possui instituições relacionadas ao seu perfil, para relacionar
+            uma instituição e poder avalia-la, faça uma busca pela sua instituição de ensino <a href="">clicando aqui</a>.
+        <?php endif; ?>
+    </div>
+    <div class="clear"></div>
+</div>

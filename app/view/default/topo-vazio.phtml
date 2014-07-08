@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Avalie - Avaliação de instituições de ensino</title>
+        <?php foreach ($this->defaultCSS as $StCSSFile): ?>
+            <link type="text/css" rel="stylesheet" href="<?= URL_VIEW_CSS ?><?= $StCSSFile ?>"/>
+        <?php endforeach; ?>
+        <?php foreach ($this->defaultJS as $StJSFile): ?>
+            <script src="<?= URL_VIEW_JS ?><?= $StJSFile ?>" type="text/javascript"></script>    
+        <?php endforeach; ?>
+        <script type="text/javascript">
+            var cache = {
+                'url': '<?= URL_AVALIE ?>'
+            }
+            $(window).load(function() {
+                $('#topicos').orbit();
+            });
+        </script>
+    </head>
+    <body>

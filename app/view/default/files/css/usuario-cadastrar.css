@@ -1,0 +1,121 @@
+root { 
+    display: block;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #333333;
+    font-family: Arial,sans-serif;
+    font-size: 12px;
+    margin: 0;
+    overflow-y: auto;
+    padding: 0;
+}
+
+.basic-form {
+
+}
+
+.basic-form .campo {
+    margin-bottom: 15px;
+}
+
+.basic-form input[type="text"], input[type="password"]{
+    width: 95%;
+    display: block;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    font-size: 14px;
+    padding: 6px 5px;
+    color: #555555;
+}
+
+
+
+.button {
+    -moz-user-select: none;
+    background-color: #EEEEEE;
+    background-image: linear-gradient(#FCFCFC, #EEEEEE);
+    background-repeat: repeat-x;
+    border: 1px solid #555555;
+    border-radius: 3px;
+    color: #333333;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 15px;
+    padding: 7px 12px;
+    position: relative;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+    vertical-align: middle;
+    white-space: nowrap;    
+    text-decoration: none;
+}
+
+.button:active {
+    -moz-user-select: none;
+    background-color: #EEEEEE;
+    background-image: linear-gradient(#EEEEEE, #FCFCFC);
+    background-repeat: repeat-x;
+    border: 1px solid #555555;
+    border-radius: 3px;
+    color: #333333;
+    cursor: pointer;
+    display: inline-block;
+    padding: 7px 12px;
+    position: relative;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+    vertical-align: middle;
+    white-space: nowrap;    
+
+}
+
+.link-button-verde {
+    background-color: #60B044;
+    background-image: linear-gradient(#8ADD6D, #60B044);
+    background-repeat: repeat-x;
+    border-color: #2A770F;
+    color: #FFFFFF;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.link-button-verde:active {
+    background-color: #60B044;
+    background-image: linear-gradient(#60B044, #8ADD6D);
+    background-repeat: repeat-x;
+    border-color: #2A770F;
+    color: #FFFFFF;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.erro {
+    background: rgb(236, 54, 54);
+    text-align: center;
+    padding: 5px;
+    border-radius: 3px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+#usuario-cadastrar {
+    padding: 10px;
+    padding-top: 0;
+}
+
+#modal-title {
+    font-size: 20px;
+    border-bottom: 1px solid #CCCCCC;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #555;
+}
+
+#topo {
+    background: #FFFFFF !important;
+}

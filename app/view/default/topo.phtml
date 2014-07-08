@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <meta charset="utf-8"/>
+
+        <link type="text/css" rel="stylesheet" href="<?= URL_VIEW_CSS ?>avalie.css"/>
+
+        <link rel="stylesheet" href="<?= URL_VIEW_CSS ?>orbit-1.2.3.css">
+
+        <title>Avalie - Avaliação de instituições de ensino</title>
+
+        <?php //var_dump($this->defaultJS); ?>
+
+        <?php foreach ($this->defaultJS as $StJSFile): ?>
+
+            <script src="<?= URL_VIEW_JS ?><?= $StJSFile ?>" type="text/javascript"></script>    
+
+        <?php endforeach; ?>
+
+
+
+        <script type="text/javascript">
+
+            var cache = {
+
+                'url': '<?= URL_AVALIE ?>'
+
+            }
+
+            $(window).load(function() {
+
+                $('#topicos').orbit();
+
+            });
+
+        </script>
+
+    </head>
+
+    <body>
+
+        <div id="wrap">
+
+            <div id="top">
+
+                <div id="top-content">
+
+                    <div id="top-title">
+
+                        <a href="<?= URL_AVALIE ?>"><img id="avalie-logo" src="<?= URL_IMAGES ?>logo.png"></a>
+
+                    </div>
+
+                    <?php if (!Session::check('Usuario')): ?>
+
+                        <a id="cadastrar-link" class="button" href="javascript:void(0)">Cadastre-se</a>
+
+                        <a id="login-link" class="button link-button-verde" href="javascript:void(0)">Login</a>
+
+                    <?php else: ?>
+
+                        <div id="main-hello">
+
+                            <?php $Usuario = Session::get('Usuario'); ?>
+
+                            Olá, <?= $Usuario->getStNome(); ?>.
+
+                            <a href="<?= URL_AVALIE ?>usuario/perfil/">Meu perfil</a> | 
+
+                            <a href="<?= URL_AVALIE ?>login/logout">Sair</a>
+
+                        </div>
+
+                    <?php endif; ?>
+
+                </div>
+
+            </div>
+
+            <div id="busca-container">
+
+                <div id="busca">
+
+                    <form method="post" action="<?= URL_AVALIE ?>busca/" id="formulario-busca">
+
+                        <input type="text" name="StBusca" id="input-busca" placeholder="Busque uma instituição"> 
+
+                        <input id="botao-busca" type="submit" class="button link-button-azul" value="Buscar">
+
+                    </form>
+
+                </div>
+
+            </div>

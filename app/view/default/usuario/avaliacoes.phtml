@@ -1,0 +1,51 @@
+<?php
+$ArMessage = Message::getMessage();
+$Usuario = Session::get('Usuario');
+?>
+<div id="main-content">
+    <?php if ($ArMessage): ?>
+        <div class="<?= !$ArMessage['StType'] ? 'erro' : 'sucesso' ?>">
+            <?= $ArMessage['StMessage'] ?>
+        </div>
+    <?php endif; ?>
+    <div id="usuario-menu-content"> 
+        <ul id="usuario-menu">
+            <li>
+                <a href="<?= URL_AVALIE ?>usuario/perfil/">Meus dados</a>
+            </li>
+            <li>
+                <a href="<?= URL_AVALIE ?>usuario/avaliacoes/"><b>Minhas avaliações</b></a>
+            </li>
+            <li>
+                <a href="<?= URL_AVALIE ?>usuario/instituicoes/">Instituições relacionadas</a>
+            </li>
+        </ul>
+    </div>
+    <div id="conteudo-perfil">
+        <h1>Minhas avaliações</h1>
+        <?php if ($_ArAvaliacoes): ?>
+            <table class="table">
+                <thead>
+                <th>Instituição</th>
+                <th>Data</th>
+                <th></th>
+                <th></th>
+                </thead>
+                <tbody>
+                    <?php foreach ($_ArAvaliacoes as $Avaliacao): ?>
+                        <tr>
+                            <td><a href="<?= URL_AVALIE ?>instituicao/perfil/id/<?= $Avaliacao->getIDInstituicao(); ?>"><?= $Avaliacao->getStInstituicao(); ?></a></td>
+                            <td><?= $Avaliacao->getDtData(); ?></td>
+                            <td><a href="<?= URL_AVALIE ?>instituicao/avaliar/id/<?= $Avaliacao->getIDInstituicao(); ?>">Editar minha avaliação</a></td>
+                            <td><a href="<?= URL_AVALIE ?>avaliacao/excluirAvaliacao/id/<?= $Avaliacao->getIDAvaliacao(); ?>">Excluir avaliação</a></td>
+                        </tr>  
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            Você ainda não avaliou nenhuma instituição de ensino, busque
+            sua instituição <a href="">clicando aqui</a> e faça sua primeira avaliação.
+        <?php endif; ?>
+    </div>
+    <div class="clear"></div>
+</div>

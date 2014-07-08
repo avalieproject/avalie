@@ -1,0 +1,136 @@
+<?php
+$ArMessage = Message::getMessage();
+if ($ArMessage) {
+    if ($ArMessage['StType'] === 'aviso') {
+        $StMsgClass = 'aviso';
+    } else {
+        $StMsgClass = !$ArMessage['StType'] ? 'erro' : 'sucesso';
+    }
+}
+?>
+<script>
+    $('document').ready(function() {
+        avaliar.setEvents();
+    });
+</script>
+<div id="main-content">
+    <div id="instituicao-perfil">
+        <?php $BlLogoIn64 = base64_encode($_Instituicao->getBlLogo()); ?>
+        <div id="logo-container">
+            <img id="logo-instituicao" src="data:image/png;base64,<?= $BlLogoIn64 ?>"/>
+        </div>
+        <div id="dados-basicos">
+            <?php echo $_Instituicao->getStNome(); ?>
+        </div>
+    </div>
+    <?php if ($ArMessage): ?>
+        <div class="<?= $StMsgClass ?>">
+            <?= $ArMessage['StMessage'] ?>
+        </div>
+    <?php endif; ?>
+    <div id="box-indice">
+        <h2 style="margin-top: 0px; font-weight: normal;">Índice de valores:</h2>
+        <div style="float: left; width: 100%; font-size: 12px; line-height: 23px;">
+            <ol class="stars">
+                <li class=""></li>
+                <li class=""></li>
+                <li class=""></li>
+                <li class=""></li>
+                <li class=""></li>
+            </ol>
+            - Sem avaliação. Desta maneira você não estará opinando sobre o desempenho da instituição neste quesito.
+        </div>
+        <div style="float: left; width: 100%; font-size: 12px; line-height: 23px;">
+            <ol class="stars">
+                <li class="active"></li>
+                <li class=""></li>
+                <li class=""></li>
+                <li class=""></li>
+                <li class=""></li>
+            </ol>
+             - Péssimo.
+        </div>
+        <div style="float: left; width: 100%; font-size: 12px; line-height: 23px;">
+            <ol class="stars">
+                <li class="active"></li>
+                <li class="active"></li>
+                <li class=""></li>
+                <li class=""></li>
+                <li class=""></li>
+            </ol>
+            - Ruim.
+        </div>
+        <div style="float: left; width: 100%; font-size: 12px; line-height: 23px;">
+            <ol class="stars">
+                <li class="active"></li>
+                <li class="active"></li>
+                <li class="active"></li>
+                <li class=""></li>
+                <li class=""></li>
+            </ol>
+            - Regular.
+        </div>
+        <div style="float: left; width: 100%; font-size: 12px; line-height: 23px;">
+            <ol class="stars">
+                <li class="active"></li>
+                <li class="active"></li>
+                <li class="active"></li>
+                <li class="active"></li>
+                <li class=""></li>
+            </ol>
+            - Bom.
+        </div>
+        <div style="float: left; width: 100%; font-size: 12px; line-height: 23px;">
+            <ol class="stars">
+                <li class="active"></li>
+                <li class="active"></li>
+                <li class="active"></li>
+                <li class="active"></li>
+                <li class="active"></li>
+            </ol>
+            - Ótimo.
+        </div>
+    </div>
+    <form id="avaliacao" method="post" action="<?= URL_AVALIE ?>avaliacao/avaliarSubmit/">
+        <div id="box-avaliacao">
+            <?php foreach ($_ArQuestoesPorConceitos as $StConceito => $Questoes): ?>
+                <div class="conceito-box">
+                    <div class="conceito-titulo">
+                        <?= $StConceito; ?>
+                    </div>
+                    <?php foreach ($Questoes as $Questao): ?>
+                        <div class="avaliacao-questao">
+                            <div class="questao-texto"><?= $Questao->getStQuestao(); ?>
+                                <ol class="stars">
+                                    <?php $ItNota = 0; ?>
+                                    <?php if (isset($_ArQuestoesRespondidas) && is_array($_ArQuestoesRespondidas)): ?>
+                                        <?php foreach ($_ArQuestoesRespondidas as $ArQuestaoRespondida): ?>
+
+                                            <?php if ($ArQuestaoRespondida['IDQuestao'] == $Questao->getIDQuestao()): ?> 
+                                                <?php $ItNota = $ArQuestaoRespondida['ItNota']; ?>
+                                            <?php endif; ?>
+
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                    <?php for ($i = 1; $i <= 5; $i++): ?>
+                                        <?php if ($ItNota >= $i): ?>
+                                            <li class="active"></li>
+                                        <?php else: ?>
+                                            <li></li>
+                                        <?php endif; ?>
+                                    <?php endfor; ?>
+                                </ol>
+                                <input type="hidden" name="ArAvaliacao[<?= $Questao->getIDQuestao(); ?>]" value="<?= !$ItNota ? '' : $ItNota ?>">
+                            </div>                            
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <input type="hidden" name="IDInstituicao" value="<?= $_Instituicao->getIDInstituicao(); ?>">
+        <input type="submit" class="button link-button-verde" style="margin-top: 30px;">
+    </form>
+    <div id="sql"></div>
+    <div class="clear"></div>
+</div>

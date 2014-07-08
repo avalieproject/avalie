@@ -1,0 +1,39 @@
+<?php
+$ArMessage = Message::getMessage();
+$Usuario = Session::get('Usuario');
+?>
+<div id="main-content">
+    <div id="usuario-menu-content"> 
+        <ul id="usuario-menu">
+            <li>
+                <a href="<?= URL_AVALIE ?>usuario/perfil/"><b>Meus dados</b></a>
+            </li>
+            <li>
+                <a href="<?= URL_AVALIE ?>usuario/avaliacoes/">Minhas avaliações</a>
+            </li>
+            <li>
+                <a href="<?= URL_AVALIE ?>usuario/instituicoes/">Instituições relacionadas</a>
+            </li>
+        </ul>
+    </div>
+    <div id="conteudo-perfil">
+        <h1>Meus dados</h1>
+        <?php if ($ArMessage): ?>
+            <div class="<?= !$ArMessage['StType'] ? 'erro' : 'sucesso' ?>">
+                <?= $ArMessage['StMessage'] ?>
+            </div>
+        <?php endif; ?>
+        <form class="basic-form" id="perfil-editar" method="post" action="<?= URL_AVALIE ?>usuario/editarPerfil/">
+            <div class="campo">
+                <label class="" for="nome">Nome:</label>
+                <input type="text" id="nome" name="ArUsuario[StNome]" value="<?= $Usuario->getStNome(); ?>">
+            </div>
+            <div class="campo">
+                <label class="" for="email">Email:</label>
+                <input type="text" id="email" name="ArUsuario[StEmail]" value="<?= $Usuario->getStEmail(); ?>">
+            </div>
+            <input type="submit" value="Alterar dados" class="button link-button-azul">
+        </form>
+    </div>
+    <div class="clear"></div>
+</div>

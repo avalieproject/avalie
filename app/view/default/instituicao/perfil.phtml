@@ -1,0 +1,69 @@
+<?php
+$ArMessage = Message::getMessage();
+if ($ArMessage) {
+    if ($ArMessage['StType'] === 'aviso') {
+        $StMsgClass = 'aviso';
+    } else {
+        $StMsgClass = !$ArMessage['StType'] ? 'erro' : 'sucesso';
+    }
+}
+?>
+<div id="main-content">
+    <div id="instituicao-perfil">
+        <?php $BlLogoIn64 = base64_encode($_Instituicao->getBlLogo()); ?>
+        <div id="logo-container">
+            <img id="logo-instituicao" src="data:image/png;base64,<?= $BlLogoIn64 ?>"/>
+        </div>
+        <div id="dados-basicos">
+            <?php echo $_Instituicao->getStNome(); ?>
+        </div>
+    </div>
+    <?php if ($ArMessage): ?>
+        <div class="<?= $StMsgClass ?>">
+            <?= $ArMessage['StMessage'] ?>
+        </div>
+    <?php endif; ?>
+
+    <div id="instituicao-content">
+        <div id="instituicao-unidades"> 
+            <h1>Unidades</h1>
+            <?php $ArUnidades = $_Instituicao->getArUnidades(); ?>
+            <?php foreach ($ArUnidades as $Unidade): ?>
+                <div class="instituicao-unidade">
+                    <b><?php echo $Unidade->getStNome(); ?></b><br>
+                    <?php echo $Unidade->getStEndereco(); ?><br>
+                    Telefones:<?php echo $Unidade->getStTel1(); ?> <?php echo $Unidade->getStTel2(); ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <div id="instituicao-avaliacoes"> 
+            <h1>Dados estatísticos</h1>
+            <div class="campo">
+                Cadastrada desde: <?= Date::dateBD2BR($_Instituicao->getDtCadastro()) ?>
+            </div>
+            <div style="border:none;" class="campo">
+                Número de vezes avaliada: <?= $_Instituicao->getItTotalAvaliacoes(); ?>
+            </div>
+            <?php
+            $ArMediaDetalhada = $_Instituicao->getArMediaDetalhada();
+            ?>
+            <?php if ($ArMediaDetalhada): ?>
+                <h1>Média por conceito:</h1>
+                <?php foreach ($ArMediaDetalhada as $ArMedia): ?>
+                    <div class="campo"><?= $ArMedia['StConceito'] ?>:<?= $ArMedia['FlMedia'] ?></div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <?php if ($_Instituicao->isSuperior()): ?>
+                <div style="" class="campo">
+                    Nota MEC: <?= $_Instituicao->getItMec(); ?>
+                </div>
+            <?php endif; ?>
+            <div style="font-weight: bold;" class="campo">
+                Média geral: <?= $_Instituicao->getFlMediaGeral(); ?>
+            </div>
+            <a class="button link-button-azul" id="avaliar" href="<?= URL_AVALIE ?>instituicao/avaliar/id/<?= $_Instituicao->getIDInstituicao(); ?>">Avalie esta instituição</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

@@ -1,0 +1,80 @@
+<?php
+$ArMessage = Message::getMessage();
+if ($ArMessage) {
+    if ($ArMessage['StType'] === 'aviso') {
+        $StMsgClass = 'aviso';
+    } else {
+        $StMsgClass = !$ArMessage['StType'] ? 'erro' : 'sucesso';
+    }
+}
+?>
+
+<div id="main-content">
+    <?php if ($ArMessage): ?>
+        <div class="<?= $StMsgClass ?>">
+            <?= $ArMessage['StMessage'] ?>
+        </div>
+    <?php endif; ?>
+    <div id="slide">
+        <div id="topicos">
+            <img src="<?= URL_IMAGES ?>cursos-univ.png" />
+            <img src="<?= URL_IMAGES ?>cursos-tec.png" />
+            <img src="<?= URL_IMAGES ?>cadastre.png" />
+        </div>
+    </div>
+
+    <div id="box-melhores-instituicoes">
+        <div id="top-box">Instituições mais bem avaliadas</div>
+        <div class="box" id="melhores-avaliacoes-superior">
+            <h1>Ensino superior</h1>
+            <?php foreach ($_ArMelhoresInstituicoes as $Instituicao): ?>
+                <?php $BlLogoIn64 = base64_encode($Instituicao->getBlLogo()); ?>
+                <div class="instituicao-melhor-avaliacao">
+                    <!--<img class="instituicao-logo" src="data:image/png;base64,<?= $BlLogoIn64 ?>">-->
+                    <div class="instituicao-dados">
+                        <div class="instituicao-nome">
+                            <a href="<?= URL_AVALIE ?>instituicao/perfil/id/<?= $Instituicao->getIDInstituicao(); ?>"><?= $Instituicao->getStNome(); ?></a>
+                        </div>
+                        <div class="instituicao-media-final">Avaliação geral: <b><?= $Instituicao->getFlMediaGeral(); ?></b></div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            <a href="<?= URL_AVALIE ?>instituicao/listar/t/superior/">Ver lista completa</a>
+        </div>
+
+        <div class="box" id="melhores-avaliacoes-superior">
+            <h1>Ensino técnico</h1>
+            <?php foreach ($_ArMelhoresInstituicoesTec as $Instituicao): ?>
+                <?php $BlLogoIn64 = base64_encode($Instituicao->getBlLogo()); ?>
+                <div class="instituicao-melhor-avaliacao">
+                    <!--<img class="instituicao-logo" src="data:image/png;base64,<?= $BlLogoIn64 ?>">-->
+                    <div class="instituicao-dados">
+                        <div class="instituicao-nome">
+                            <a href="<?= URL_AVALIE ?>instituicao/perfil/id/<?= $Instituicao->getIDInstituicao(); ?>"><?= $Instituicao->getStNome(); ?></a>
+                        </div>
+                        <div class="instituicao-media-final">Avaliação geral: <b><?= $Instituicao->getFlMediaGeral(); ?></b></div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            <a href="<?= URL_AVALIE ?>instituicao/listar/t/tecnico/">Ver lista completa</a>
+        </div>
+
+        <div class="box" id="melhores-avaliacoes-superior">
+            <h1>Pós-graduação</h1>
+            <?php foreach ($_ArMelhoresInstituicoes as $Instituicao): ?>
+                <?php $BlLogoIn64 = base64_encode($Instituicao->getBlLogo()); ?>
+                <div class="instituicao-melhor-avaliacao">
+                    <!--<img class="instituicao-logo" src="data:image/png;base64,<?= $BlLogoIn64 ?>">-->
+                    <div class="instituicao-dados">
+                        <div class="instituicao-nome">
+                            <a href="<?= URL_AVALIE ?>instituicao/perfil/id/<?= $Instituicao->getIDInstituicao(); ?>"><?= $Instituicao->getStNome(); ?></a>
+                        </div>
+                        <div class="instituicao-media-final">Avaliação geral: <b><?= $Instituicao->getFlMediaGeral(); ?></b></div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            <a href="<?= URL_AVALIE ?>instituicao/listar/t/superior/">Ver lista completa</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

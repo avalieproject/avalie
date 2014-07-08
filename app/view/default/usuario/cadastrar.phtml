@@ -1,0 +1,32 @@
+<script>
+    $('document').ready(function(){
+       usuarioCadastro.setEvents();  
+    });
+</script>
+<div id="usuario-cadastrar">
+    <form class="basic-form" method="post" action="<?= URL_AVALIE ?>usuario/xhrCadastrarSubmit">
+        <div id="modal-title">
+            Cadastro:
+        </div>
+        <div id="msg-return" class=""></div>
+        <div class="campo">
+            <label for="nome">Nome:</label>
+            <input id="nome" type="text" name="ArUsuario[StNome]">
+        </div>
+        <div class="campo">
+            <label for="email">Email:</label>
+            <input id="email" type="text" name="ArUsuario[StEmail]">
+        </div>
+        <div class="campo">
+            <label for="senha">Senha:</label>
+            <input id="senha" type="password" name="ArUsuario[StSenha]">
+        </div>
+        <div class="campo">
+            <label for="senha-confirmacao">Confirme a senha:</label>
+            <input id="senha-confirmacao" type="password" name="ArUsuario[StSenhaConfirmacao]">
+        </div>
+        <input id="usuario-cadastrar-submit" type="button" value="Cadastrar" class="button link-button-verde">
+    </form>
+</div>
+</body>
+</html>

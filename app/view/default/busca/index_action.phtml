@@ -1,0 +1,32 @@
+<?php
+$ArMessage = Message::getMessage();
+if ($ArMessage) {
+    if ($ArMessage['StType'] === 'aviso') {
+        $StMsgClass = 'aviso';
+    } else {
+        $StMsgClass = !$ArMessage['StType'] ? 'erro' : 'sucesso';
+    }
+}
+?>
+
+<div id="main-content">
+    <?php if ($ArMessage): ?>
+        <div class="<?= $StMsgClass ?>">
+            <?= $ArMessage['StMessage'] ?>
+        </div>
+    <?php endif; ?>
+    <?php if ($_ArInstituicoes): ?>
+        <b>Foram encontrados <?= count($_ArInstituicoes) ?> resultados:</b><br>
+        <?php foreach ($_ArInstituicoes as $Instituicao): ?>
+            <div class="resultado-busca-instituicao">
+                <div class="nome">
+                    <a href="<?=URL_AVALIE?>instituicao/perfil/id/<?=$Instituicao->getIDInstituicao();?>"><?=$Instituicao->getStNome(); ?></a>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        Não foram encontrados resultados para sua busca.
+    <?php endif; ?>
+
+    <div class="clear"></div>
+</div>
